@@ -36,8 +36,9 @@ The symbols are as follows:
   - ``↑n``: ahead of remote by ``n`` commits
   - ``↓n``: behind remote by ``n`` commits
   - ``↓m↑n``: branches diverged, other by ``m`` commits, yours by ``n`` commits
-- Branch Symbol:<br />
-  	When the branch name starts with a colon ``:``, it means it's actually a hash, not a branch (although it should be pretty clear, unless you name your branches like hashes :-)
+- Branch Symbol<br />
+  If you are currently not on any branch, instead of branch name you would see short HEAD commit hash preceded with a colon (``:``)<br />
+  If you are currently not on any branch, but commit you are on is referenced by any tag, tag name preceded with fisheye (``◉``) would be show
 
 ## Install
 
@@ -50,3 +51,6 @@ The symbols are as follows:
 **Enjoy!**
 
 [blog post]: http://sebastiancelis.com/2009/nov/16/zsh-prompt-git-users/
+
+## TODO:
+update symbols to fancy from http://unicode-table.com/
