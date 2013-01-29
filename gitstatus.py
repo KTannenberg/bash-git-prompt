@@ -4,11 +4,11 @@
 from __future__ import print_function
 
 # change those symbols to whatever you prefer
-symbols = {'ahead of': '↑·', 'behind': '↓·', 'prehash':':'}
+symbols = {'ahead of': '↑ ', 'behind': '↓ ', 'prehash':':', 'pretag':'◉ '}
 
 from subprocess import Popen, PIPE
 
-import sys
+import sys, re
 gitsym = Popen(['git', 'symbolic-ref', 'HEAD'], stdout=PIPE, stderr=PIPE)
 branch, error = gitsym.communicate()
 
@@ -41,7 +41,20 @@ else:
 remote = ''
 
 if not branch: # not on any branch
-	branch = symbols['prehash']+ Popen(['git','rev-parse','--short','HEAD'], stdout=PIPE).communicate()[0][:-1]
+	# try to resolve tag name
+	hash = Popen(['git','rev-parse','--short','HEAD'], stdout=PIPE).communicate()[0][:-1]
+	
+	tags = Popen(['git', 'show-ref', '--tags', '-d', '--abbrev'], stdout=PIPE)
+	tags = Popen(['grep', hash], stdin=tags.stdout, stdout=PIPE)
+	
+	# 01ab03c refs/tags/X.Y.Z
+	tag = tags.communicate()[0][0:-1]
+	match = re.search('(?<=[abcdef\d]{7} refs/tags/).*', tag)
+	if match:
+		tag = re.sub('\^\{\}', '', match.group(0))
+		branch = symbols['pretag'] + tag
+	else:
+		branch = symbols['prehash'] + hash
 else:
 	remote_name = Popen(['git','config','branch.%s.remote' % branch], stdout=PIPE).communicate()[0].strip()
 	if remote_name:
