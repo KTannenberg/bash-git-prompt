@@ -17,6 +17,7 @@ The prompt may look like the following:
 * ``(master|✖2✚3)``: on branch ``master``, 2 conflicts, 3 files changed
 * ``(experimental↓2↑3|✔)``: on branch ``experimental``; your branch has diverged by 3 commits, remote by 2 commits; the repository is otherwise clean
 * ``(:70c2952|✔)``: not on any branch; parent commit has hash ``70c2952``; the repository is otherwise clean
+* ``(◉v0.0.1|✔)``: not on any branch; parent commit is referenced by tag with name ``v0.0.01`` the repository is otherwise clean
 
 ##  Prompt Structure
 
@@ -37,8 +38,8 @@ The symbols are as follows:
   - ``↓n``: behind remote by ``n`` commits
   - ``↓m↑n``: branches diverged, other by ``m`` commits, yours by ``n`` commits
 - Branch Symbol<br />
-  If you are currently not on any branch, instead of branch name you would see short HEAD commit hash preceded with a colon (``:``)<br />
-  If you are currently not on any branch, but commit you are on is referenced by any tag, tag name preceded with fisheye (``◉``) would be show
+  If you are currently not on any branch, instead of branch name you would see short HEAD commit hash preceded with a colon (:)<br />
+  If you are currently not on any branch, but commit you are on is referenced by tag, tag name preceded with fisheye (◉) would be show
 
 ## Install
 
